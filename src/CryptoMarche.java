@@ -18,39 +18,46 @@ public class CryptoMarche {
 		portefeuilles.add(p);
 	}
 
-	/**
-	 * Cette fonction recherche sur le marché tous les portefeuilles 
-	 * du propriétaire et calcule son capital en euros. 
-	 * @param proprietare
-	 * @return capital en euros du propriétare.
-	 */
-	public double capitalEnEuros(String proprietaire){
-		
-		for (int cpt =0; cpt < portefeuilles.size(); cpt ++)
-		{
-			if ( portefeuilles.get(cpt).getProprietaire() == proprietaire )
-				return portefeuilles.get(cpt).getMontant();
-		}
-		return 0;
-	}
-
-	/**
-	 * Cette fonction recherche sur le marché tous les portefeuilles 
-	 * d'un type de devise et calcule le volume total de capital de 
-	 * cette devise sur le marché 
-	 * @param monnaie
-	 * @return capital total en circulation de la cryptomonnaie (en euros).
-	 */
-	public double capitalMonneaie(Cryptomonnaie monnaie){
+    /**
+     * Cette fonction recherche sur le marchÃ© tous les portefeuilles 
+     * du propriÃ©taire et calcule son capital en euros. 
+     * @param proprietare
+     * @return capital en euros du propriÃ©tare.
+     */
+    public double capitalEnEuros(String proprietaire)
+	{
 		double capital = 0;
-		
-		for (int cpt = 0; cpt < portefeuilles.size(); cpt ++)
-			if (portefeuilles.get(cpt).getMonnaie() == monnaie)
-				capital += portefeuilles.get(cpt).getMontant();
-
+		for (int cpt = 0; cpt < portefeuilles.size(); cpt ++) 
+		{
+			if (portefeuilles.get(cpt).getProprietaire().equals(proprietaire))
+			{
+				capital += portefeuilles.get(cpt).valeurEnEuros();
+			}
+		}
 		return capital;
-
 	}
+
+    /**
+     * Cette fonction recherche sur le marchÃ© tous les portefeuilles 
+     * d'un type de devise et calcule le volume total de capital de 
+     * cette devise sur le marchÃ© 
+     * @param monnaie
+     * @return capital total en circulation de la cryptomonnaie (en euros).
+     */
+	public double capitalMonneaie(Cryptomonnaie monnaie)
+	{
+		double capital = 0;
+		for (int cpt = 0; cpt < portefeuilles.size(); cpt ++) 
+		{
+			if (portefeuilles.get(cpt).getMonnaie().getNom().equals(monnaie.getNom())) 
+			{
+				capital += portefeuilles.get(cpt).valeurEnEuros();
+			}
+		}
+		return capital;
+	}
+
+
 
 	@Override
 	public String toString() {
